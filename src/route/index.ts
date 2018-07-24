@@ -6,6 +6,7 @@ import backend from './backend';
 import frontend from './frontend';
 import loeRequest from './loeRequest';
 import mobile from './mobile';
+import completeForm from './completeForm';
 
 export default () => compose([
   additionalFeatures(),
@@ -13,4 +14,5 @@ export default () => compose([
   mobile(),
   loeRequest(),
   frontend(),
+  completeForm(),
 ]);
