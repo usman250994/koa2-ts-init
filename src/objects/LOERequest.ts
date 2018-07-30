@@ -1,6 +1,8 @@
-import { AdditionalFeaturesI, BackendI, FrontendI, MobileI } from '../interfaces';
+ import { BasicAdminPanel, ComplexityMultiplier, DefaultMonthlyHours, DefaultOneWeekHours,
+     DefaultTwoWeekHours, HybridMultiplier, SingleInterfaceHours} from '../constants';
+ import { AdditionalFeaturesI, BackendI, FrontendI, MobileI } from '../interfaces';
 
-export default class LOERequest {
+ export default class LOERequest {
     public additionalFeatures: number;
     public backend: number;
     public frontend: number;
@@ -43,11 +45,11 @@ export default class LOERequest {
         if (frontEndRequst == null) {
             return 0;
         }
-        const {IsAdminPanelRequired, IsConsumerFrontendRequired, , , , , } = frontEndRequst;
+        const {IsAdminPanelRequired, IsConsumerFrontendRequired, NumberOfInterfaces } = frontEndRequst;
         let totalHours = 0;
 
         totalHours += IsAdminPanelRequired ? BasicAdminPanel : 0;
-        IsConsumerFrontendRequired ?
+        totalHours +=  IsConsumerFrontendRequired ?
         (NumberOfInterfaces > 0 ?
             NumberOfInterfaces * SingleInterfaceHours : DefaultMonthlyHours) : 0;
         totalHours += IsBasicChattingRequired ? DefaultTwoWeekHours : 0;
@@ -90,7 +92,7 @@ export default class LOERequest {
             }
             mobileRequest.SuggestedAppApproach = "Hybrid";
         } else {
-            totalHours += mobileRequest.IsAndroidAppRequired ? 
+            totalHours += mobileRequest.IsAndroidAppRequired ?
                 (NumberOfInterfaces > 0 ?
                     NumberOfInterfaces * SingleInterfaceHours
                       : DefaultMonthlyHours) : 0;
