@@ -4,15 +4,13 @@ import * as Router from 'koa-router';
 import additionalFeatures from './additionalFeatures';
 import backend from './backend';
 import frontend from './frontend';
-import loeRequest from './loeRequest';
+import LOERequest from './LOERequest';
 import mobile from './mobile';
-import completeForm from './completeForm';
 
 export default () => compose([
   additionalFeatures(),
   backend(),
   mobile(),
-  loeRequest(),
   frontend(),
-  completeForm(),
+  LOERequest(),
 ]);

@@ -2,7 +2,7 @@ import { methodNotAllowed, notImplemented } from 'boom';
 import * as compose from 'koa-compose';
 import * as Router from 'koa-router';
 
-import {completeForm as Ctrl} from '../controller/';
+import {LOERequest as Ctrl} from '../controller/';
 
 const router = new Router({
   prefix: '/completeForm',
