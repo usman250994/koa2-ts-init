@@ -99,7 +99,7 @@
             totalHours += IsIPhoneAppRequired ?
                 (NumberOfInterfaces > 0 ?
                     NumberOfInterfaces * SingleInterfaceHours : DefaultMonthlyHours) : 0;
-                    mobileRequest.SuggestedAppApproach = 'Native';
+            mobileRequest.SuggestedAppApproach = 'Native';
         }
         return totalHours;
     }
@@ -110,7 +110,6 @@
         }
         const { IsAnyCMSRequired, OneWayThirdPartyIntegrationRequired,
          TwoWayThirdPartyIntegrationRequired } = additionalFeaturesRequest;
-
         let totalHours = 0;
 
         totalHours += IsAnyCMSRequired ? DefaultTwoWeekHours : 0;

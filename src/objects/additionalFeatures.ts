@@ -1,14 +1,8 @@
-export default class AdditionalFeatures {
-    public IsBasicChattingRequired: boolean;
-    public IsProperChatSolutionRequired: boolean;
-    public IsAnyCMSRequired: boolean;
-    public IsComplicated: boolean;
+import { AdditionalFeaturesI } from '../interfaces';
 
-    constructor(isAnyCMSRequired: boolean, IsProperChatSolutionRequired: boolean,
-                isBasicChattingRequired: boolean, isComplicated: boolean) {
-        this.IsAnyCMSRequired = isAnyCMSRequired;
-        this.IsProperChatSolutionRequired = IsProperChatSolutionRequired;
-        this.IsBasicChattingRequired = isBasicChattingRequired;
-        this.IsComplicated = isComplicated;
-    }
+export default class AdditionalFeatures implements AdditionalFeaturesI {
+    public IsAnyCMSRequired: boolean;
+    public OneWayThirdPartyIntegrationRequired: boolean;
+    public TwoWayThirdPartyIntegrationRequired: boolean;
+    public IsComplicated: boolean;
 }

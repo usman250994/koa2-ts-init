@@ -1,9 +1,11 @@
-export default class Backend {
-    public IsBackendRequired: boolean;
-    public IsComplicated: boolean;
+import { BackendI } from '../interfaces';
 
-    constructor(isBackendRequired: boolean, isComplicated: boolean) {
-        this.IsBackendRequired = isBackendRequired;
-        this.IsComplicated = isComplicated;
-    }
+export default class Backend implements BackendI {
+    public RequireConfigurableWorkflow: boolean;
+    public  WorkflowLogicRequired: boolean;
+    public   ActiveDirectoryIntegrationRequired: boolean;
+    public NumberOfInterfaces: number;
+    public IsBasicChattingRequired: boolean;
+    public IsProperChatSolutionRequired: boolean;
+    public IsComplicated: boolean;
 }

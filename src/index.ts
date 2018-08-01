@@ -6,7 +6,7 @@ import * as bodyParser from 'koa-bodyparser';
 import * as loggerMiddleware from 'koa-bunyan-logger';
 import * as jsonMiddleware from 'koa-json';
 
-
+import * as cors from '@koa/cors';
 import errorMiddleware from './middleware/error';
 import requestMiddleware from './middleware/request';
 
@@ -23,6 +23,7 @@ app.use(loggerMiddleware());
 app.use(requestMiddleware());
 app.use(bodyParser());
 app.use(errorMiddleware());
+app.use(cors());
 
 // Registers routes via middleware
 app.use(routeMiddleware());

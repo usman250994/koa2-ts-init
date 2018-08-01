@@ -1,11 +1,10 @@
-export default class Frontend {
-    public IsConsumerFrontendRequired: boolean;
-    public IsAdminPanelRequired: boolean;
-    public IsComplicated: boolean;
+import { FrontendI } from '../interfaces';
 
-    constructor(isConsumerFrontendRequired: boolean, isAdminPanelRequired: boolean, iscomplicated: boolean) {
-        this.IsAdminPanelRequired = isAdminPanelRequired;
-        this.IsConsumerFrontendRequired = isConsumerFrontendRequired;
-        this.IsComplicated = iscomplicated;
-    }
+export default class Frontend implements FrontendI {
+    public IsAdminPanelRequired: boolean;
+    public IsConsumerFrontendRequired: boolean;
+    public NumberOfInterfaces: number;
+    public IsBasicChattingRequired: boolean;
+    public IsProperChatSolutionRequired: boolean;
+    public IsComplicated: boolean;
 }
