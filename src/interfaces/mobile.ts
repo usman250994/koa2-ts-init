@@ -1,8 +1,12 @@
 
 export default interface MobileI {
-    IsIPhoneAppRequired: boolean;
-    IsAndroidAppRequired: boolean;
     IsLocationBasedWorkRequired: boolean;
     IsOfflineSupportRequired: boolean;
-    NeedLowCostMobileSolution: boolean;
+    IsBasicChattingRequired: boolean;
+    IsProperChatSolutionRequired: boolean;
+    NeedLowCostSolution: boolean;
+    NumberOfInterfaces: number;
+    IsIPhoneAppRequired: boolean;
+    IsAndroidAppRequired: boolean;
+    IsComplicated: boolean;
 }

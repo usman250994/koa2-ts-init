@@ -1,4 +1,8 @@
 export default interface FrontendI {
+    IsAdminPanelRequired: boolean;
     IsConsumerFrontendRequired: boolean;
-    isAdminPanelRequired: boolean;
+    NumberOfInterfaces: number;
+    IsBasicChattingRequired: boolean;
+    IsProperChatSolutionRequired: boolean;
+    IsComplicated: boolean;
 }

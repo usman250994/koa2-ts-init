@@ -22,7 +22,7 @@
 
         const { RequireConfigurableWorkflow, WorkflowLogicRequired,
              ActiveDirectoryIntegrationRequired, NumberOfInterfaces,
-              IsBasicChattingRequired, IsProperChatSolutionRequired } = backendRequest;
+              IsBasicChattingRequired, IsProperChatSolutionRequired,IsComplicated } = backendRequest;
 
         let totalHours = 0;
         totalHours += RequireConfigurableWorkflow ? DefaultTwoWeekHours : 0;
@@ -31,13 +31,12 @@
         totalHours += NumberOfInterfaces > 0 ? NumberOfInterfaces * SingleInterfaceHours : 0;
         totalHours += IsBasicChattingRequired ? DefaultTwoWeekHours : 0;
         totalHours += IsProperChatSolutionRequired ? DefaultMonthlyHours : 0;
-        totalHours += this.ApplyComplexity(backendRequest, totalHours);
+        totalHours += this.ApplyComplexity(IsComplicated, totalHours);
 
         return totalHours;
     }
 
-    private ApplyComplexity(CommonFeatures: CommonFeaturesI, currentTotal: number) {
-        const { IsComplicated } = CommonFeatures;
+    private ApplyComplexity(IsComplicated: boolean, currentTotal: number) {
         return IsComplicated ? (currentTotal * ComplexityMultiplier) : 0;
     }
 
@@ -45,7 +44,8 @@
         if (frontEndRequst == null) {
             return 0;
         }
-        const {IsAdminPanelRequired, IsConsumerFrontendRequired, NumberOfInterfaces } = frontEndRequst;
+        const {IsAdminPanelRequired, IsConsumerFrontendRequired, NumberOfInterfaces,
+             IsBasicChattingRequired, IsProperChatSolutionRequired, IsComplicated } = frontEndRequst;
         let totalHours = 0;
 
         totalHours += IsAdminPanelRequired ? BasicAdminPanel : 0;
@@ -55,7 +55,7 @@
         totalHours += IsBasicChattingRequired ? DefaultTwoWeekHours : 0;
         totalHours += IsProperChatSolutionRequired ? DefaultMonthlyHours : 0;
 
-        totalHours += this.ApplyComplexity(frontEndRequst, totalHours);
+        totalHours += this.ApplyComplexity(IsComplicated, totalHours);
         return totalHours;
     }
 
@@ -66,7 +66,7 @@
         const {IsLocationBasedWorkRequired, IsOfflineSupportRequired,
              IsBasicChattingRequired, IsProperChatSolutionRequired,
              NeedLowCostSolution, NumberOfInterfaces,
-              IsIPhoneAppRequired, IsAndroidAppRequired  } = mobileRequest;
+              IsIPhoneAppRequired, IsAndroidAppRequired, IsComplicated  } = mobileRequest;
 
         let totalHours = 0;
         totalHours += IsLocationBasedWorkRequired ? DefaultOneWeekHours : 0;
@@ -74,23 +74,23 @@
         totalHours += IsBasicChattingRequired ? DefaultTwoWeekHours : 0;
         totalHours += IsProperChatSolutionRequired ? DefaultMonthlyHours : 0;
 
-        totalHours += this.ApplyComplexity(mobileRequest, totalHours);
+        totalHours += this.ApplyComplexity(IsComplicated, totalHours);
 
         if (NeedLowCostSolution
             && (IsLocationBasedWorkRequired || ! IsOfflineSupportRequired)) {
             // since client had asked for both apps, now reduce the cost
             if (IsIPhoneAppRequired && IsAndroidAppRequired) {
-                totalHours += mobileRequest.IsAndroidAppRequired ?
+                totalHours += IsAndroidAppRequired ?
                 (NumberOfInterfaces > 0 ?
                      NumberOfInterfaces * SingleInterfaceHours
                       : DefaultMonthlyHours) : 0;
                 totalHours = totalHours * HybridMultiplier;
             } else {
-                totalHours += mobileRequest.IsAndroidAppRequired ?
+                totalHours += IsAndroidAppRequired ?
                  (NumberOfInterfaces > 0 ?
                    NumberOfInterfaces * SingleInterfaceHours : DefaultMonthlyHours) : 0;
             }
-            mobileRequest.SuggestedAppApproach = "Hybrid";
+            mobileRequest.SuggestedAppApproach = 'Hybrid';
         } else {
             totalHours += mobileRequest.IsAndroidAppRequired ?
                 (NumberOfInterfaces > 0 ?
@@ -99,7 +99,7 @@
             totalHours += IsIPhoneAppRequired ?
                 (NumberOfInterfaces > 0 ?
                     NumberOfInterfaces * SingleInterfaceHours : DefaultMonthlyHours) : 0;
-                    mobileRequest.SuggestedAppApproach = "Native";
+                    mobileRequest.SuggestedAppApproach = 'Native';
         }
         return totalHours;
     }
@@ -109,7 +109,8 @@
             return 0;
         }
         const { IsAnyCMSRequired, OneWayThirdPartyIntegrationRequired,
-         TwoWayThirdPartyIntegrationRequired } = this.additionalFeatures;
+         TwoWayThirdPartyIntegrationRequired } = additionalFeaturesRequest;
+
         let totalHours = 0;
 
         totalHours += IsAnyCMSRequired ? DefaultTwoWeekHours : 0;
